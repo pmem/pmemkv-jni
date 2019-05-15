@@ -36,9 +36,12 @@ set(SOURCE_FILES src/io_pmem_pmemkv_KVEngine.cpp src/io_pmem_pmemkv_KVEngine.h)
 set(3RDPARTY ${PROJECT_SOURCE_DIR}/3rdparty)
 set(GTEST_VERSION 1.7.0)
 
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR}/cmake)
+
 find_package(PkgConfig QUIET)
 include(ExternalProject)
 include(FindThreads)
+include(GNUInstallDirs)
 
 set(GTEST_URL ${CMAKE_SOURCE_DIR}/googletest-${GTEST_VERSION}.zip)
 if(EXISTS ${GTEST_URL})
@@ -65,8 +68,22 @@ find_package(JNI)
 include_directories(${JNI_INCLUDE_DIRS})
 link_directories(${JNI_LIBRARIES})
 
+find_package(Libpmemkv REQUIRED)
+
 add_library(pmemkv-jni SHARED ${SOURCE_FILES})
 target_link_libraries(pmemkv-jni pmemkv)
+
+install(TARGETS pmemkv-jni
+        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+
+configure_file(
+    "${CMAKE_SOURCE_DIR}/cmake/cmake_uninstall.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake"
+    IMMEDIATE @ONLY)
+
+add_custom_target(uninstall
+    COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake)
 
 add_executable(pmemkv-jni_test src/pmemkv-jni_test.cc)
 target_link_libraries(pmemkv-jni_test pmemkv libgtest)
