@@ -53,7 +53,7 @@ JNIEXPORT void JNICALL Java_io_pmem_pmemkv_KVEngine_kvengine_1all_1string
  * Signature: (JILjava/nio/ByteBuffer;Lio/pmem/pmemkv/internal/AllBuffersJNICallback;)V
  */
 JNIEXPORT void JNICALL Java_io_pmem_pmemkv_KVEngine_kvengine_1all_1above_1buffer
-  (JNIEnv *, jobject, jlong, jint, jobject, jobject);
+  (JNIEnv *, jobject, jlong, jobject, jint, jobject);
 
 /*
  * Class:     io_pmem_pmemkv_KVEngine
@@ -101,7 +101,7 @@ JNIEXPORT void JNICALL Java_io_pmem_pmemkv_KVEngine_kvengine_1all_1below_1string
  * Signature: (JILjava/nio/ByteBuffer;ILjava/nio/ByteBuffer;Lio/pmem/pmemkv/internal/AllBuffersJNICallback;)V
  */
 JNIEXPORT void JNICALL Java_io_pmem_pmemkv_KVEngine_kvengine_1all_1between_1buffer
-  (JNIEnv *, jobject, jlong, jint, jobject, jint, jobject, jobject);
+  (JNIEnv *, jobject, jlong, jobject, jint, jobject, jint, jobject);
 
 /*
  * Class:     io_pmem_pmemkv_KVEngine
@@ -165,7 +165,7 @@ JNIEXPORT jlong JNICALL Java_io_pmem_pmemkv_KVEngine_kvengine_1count_1below_1byt
  * Signature: (JILjava/nio/ByteBuffer;ILjava/nio/ByteBuffer;)J
  */
 JNIEXPORT jlong JNICALL Java_io_pmem_pmemkv_KVEngine_kvengine_1count_1between_1buffer
-  (JNIEnv *, jobject, jlong, jint, jobject, jint, jobject);
+  (JNIEnv *, jobject, jlong, jobject, jint, jobject, jint);
 
 /*
  * Class:     io_pmem_pmemkv_KVEngine
@@ -253,7 +253,7 @@ JNIEXPORT void JNICALL Java_io_pmem_pmemkv_KVEngine_kvengine_1each_1below_1strin
  * Signature: (JILjava/nio/ByteBuffer;ILjava/nio/ByteBuffer;Lio/pmem/pmemkv/internal/EachBufferJNICallback;)V
  */
 JNIEXPORT void JNICALL Java_io_pmem_pmemkv_KVEngine_kvengine_1each_1between_1buffer
-  (JNIEnv *, jobject, jlong, jint, jobject, jint, jobject, jobject);
+  (JNIEnv *, jobject, jlong, jobject, jint, jobject, jint, jobject);
 
 /*
  * Class:     io_pmem_pmemkv_KVEngine
@@ -293,7 +293,7 @@ JNIEXPORT jboolean JNICALL Java_io_pmem_pmemkv_KVEngine_kvengine_1exists_1bytes
  * Signature: (JILjava/nio/ByteBuffer;ILjava/nio/ByteBuffer;)I
  */
 JNIEXPORT jint JNICALL Java_io_pmem_pmemkv_KVEngine_kvengine_1get_1buffer
-  (JNIEnv *, jobject, jlong, jint, jobject, jint, jobject);
+  (JNIEnv *, jobject, jlong, jobject, jint, jobject, jint);
 
 /*
  * Class:     io_pmem_pmemkv_KVEngine
@@ -309,7 +309,7 @@ JNIEXPORT jbyteArray JNICALL Java_io_pmem_pmemkv_KVEngine_kvengine_1get_1bytes
  * Signature: (JILjava/nio/ByteBuffer;ILjava/nio/ByteBuffer;)V
  */
 JNIEXPORT void JNICALL Java_io_pmem_pmemkv_KVEngine_kvengine_1put_1buffer
-  (JNIEnv *, jobject, jlong, jint, jobject, jint, jobject);
+  (JNIEnv *, jobject, jlong, jobject, jint, jobject, jint);
 
 /*
  * Class:     io_pmem_pmemkv_KVEngine
