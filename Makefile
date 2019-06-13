@@ -3,7 +3,7 @@ prefix=/usr/local
 all: clean test
 
 clean:
-	rm -rf ./bin googletest-*.zip
+	rm -rf ./bin
 
 configure:
 	mkdir -p ./bin
