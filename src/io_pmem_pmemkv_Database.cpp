@@ -589,7 +589,7 @@ extern "C" JNIEXPORT jboolean JNICALL Java_io_pmem_pmemkv_Database_database_1exi
     auto engine = (pmemkv_db*) pointer;
     const char* ckey = (char*) env->GetDirectBufferAddress(key);
     auto status = pmemkv_exists(engine, ckey, keybytes);
-    if (status == PMEMKV_STATUS_FAILED) env->ThrowNew(env->FindClass(EXCEPTION_CLASS), "pmemkv_exists() failed");
+    if (status == PMEMKV_STATUS_UNKNOWN_ERROR) env->ThrowNew(env->FindClass(EXCEPTION_CLASS), "pmemkv_exists() failed");
     return status == PMEMKV_STATUS_OK;
 
 }
