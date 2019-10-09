@@ -40,8 +40,8 @@ package_type=$1
 
 # stable_pmemkv_version="0.8"
 
-# commit: Merge pull request #456 from karczex/multithreaded_cmap_test; 27.09.2019
-current_pmemkv_version="70b4a1272dc0e0be1ed716ff8797092396295759"
+# Version 1.0.1-rc1, 21.10.2019
+current_pmemkv_version="1.0.1-rc1"
 
 prepare_pmemkv () {
 	pmemkv_version="$1"
@@ -51,7 +51,8 @@ prepare_pmemkv () {
 	cd build
 	cmake .. -DCMAKE_BUILD_TYPE=RelWithDebInfo \
 		-DCMAKE_INSTALL_PREFIX=$PREFIX \
-		-DCPACK_GENERATOR=$package_type
+		-DCPACK_GENERATOR=$package_type \
+		-DTESTS_USE_VALGRIND=OFF
 	make package
 	cd ..
 	mkdir /opt/"$version_name"
