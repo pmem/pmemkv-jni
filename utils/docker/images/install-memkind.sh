@@ -1,5 +1,6 @@
+#!/usr/bin/env bash
 #
-# Copyright 2016-2019, Intel Corporation
+# Copyright 2019, Intel Corporation
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions
@@ -30,72 +31,18 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #
-# Dockerfile - a 'recipe' for Docker to build an image of ubuntu-based
-#              environment prepared for running pmemkv-jni build and tests.
+# install-memkind.sh - installs newest memkind (master)
 #
 
-# Pull base image
-FROM ubuntu:19.04
-MAINTAINER lukasz.stolarczuk@intel.com
+set -e
 
-# Update the Apt cache and install basic tools
-RUN apt-get update
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-	autoconf \
-	automake \
-	build-essential \
-	clang \
-	cmake \
-	curl \
-	debhelper \
-	devscripts \
-	fakeroot \
-	git \
-	libc6-dbg \
-	libdaxctl-dev \
-	libgtest-dev \
-	libmemkind-dev \
-	libndctl-dev \
-	libnode-dev \
-	libnuma-dev \
-	libtbb-dev \
-	libtext-diff-perl \
-	libtool \
-	libunwind8-dev \
-	numactl \
-	openjdk-8-jdk \
-	pandoc \
-	pkg-config \
-	rapidjson-dev \
-	sudo \
-	wget \
-	whois \
- && rm -rf /var/lib/apt/lists/*
+git clone https://github.com/memkind/memkind
+cd memkind
+# 1.9.0
+git checkout v1.9.0
 
-# Install memkind
-COPY install-memkind.sh install-memkind.sh
-RUN ./install-memkind.sh
+./build.sh --prefix=/usr
+sudo make install
 
-# Install pmdk
-COPY install-pmdk.sh install-pmdk.sh
-RUN ./install-pmdk.sh dpkg
-
-# Install pmdk c++ bindings
-COPY install-libpmemobj-cpp.sh install-libpmemobj-cpp.sh
-RUN ./install-libpmemobj-cpp.sh DEB
-
-# Prepare pmemkv
-COPY prepare-pmemkv.sh prepare-pmemkv.sh
-RUN ./prepare-pmemkv.sh DEB
-
-# Add user
-ENV USER user
-ENV USERPASS pass
-RUN useradd -m $USER -g sudo -p `mkpasswd $USERPASS`
-USER $USER
-
-# Set required environment variables
-ENV OS ubuntu
-ENV OS_VER 19.04
-ENV PACKAGE_MANAGER deb
-ENV NOTTY 1
+cd ..
+rm -r memkind
