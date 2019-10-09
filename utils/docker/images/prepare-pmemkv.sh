@@ -38,10 +38,11 @@ set -e
 
 package_type=$1
 
-# stable_pmemkv_version="0.8"
-
 # Version 1.0.1, 28.10.2019
-current_pmemkv_version="1.0.1"
+stable_pmemkv_version="1.0.1"
+
+# Merge pull request #503 from pmem/stable-1.0, 18.10.2019
+current_pmemkv_version="dfc445bbcba096295a30469270aba8c12b894227"
 
 prepare_pmemkv () {
 	pmemkv_version="$1"
@@ -63,7 +64,7 @@ prepare_pmemkv () {
 git clone https://github.com/pmem/pmemkv
 cd pmemkv
 
-# prepare_pmemkv "$stable_pmemkv_version" "pmemkv-stable"
+prepare_pmemkv "$stable_pmemkv_version" "pmemkv-stable-1.0"
 prepare_pmemkv "$current_pmemkv_version" "pmemkv-master"
 
 cd ..
