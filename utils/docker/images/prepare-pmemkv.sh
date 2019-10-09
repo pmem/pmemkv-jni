@@ -40,8 +40,8 @@ package_type=$1
 
 # stable_pmemkv_version="0.8"
 
-# commit: Merge pull request #456 from karczex/multithreaded_cmap_test; 27.09.2019
-current_pmemkv_version="70b4a1272dc0e0be1ed716ff8797092396295759"
+# Merge pull request #489 from igchor/fix_memkind_find_path, 7.10.2019
+current_pmemkv_version="abf2c94d61c3128e09ab0688e58ca84fd415be49"
 
 prepare_pmemkv () {
 	pmemkv_version="$1"
