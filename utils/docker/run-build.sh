@@ -35,16 +35,14 @@
 #                                 pmemkv installed in given version
 #
 
-PREFIX=/usr
-
 set -e
 
 pmemkv_version=$1
 cd /opt/pmemkv-$pmemkv_version/
 
-if [ "${OS}" = "ubuntu" ]; then
+if [ "${PACKAGE_MANAGER}" = "deb" ]; then
 	echo $USERPASS | sudo -S dpkg -i libpmemkv*.deb
-elif [ "${OS}" = "fedora" ]; then
+elif [ "${PACKAGE_MANAGER}" = "rpm" ]; then
 	echo $USERPASS | sudo -S rpm -i libpmemkv*.rpm
 fi
 
